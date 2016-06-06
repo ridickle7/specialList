@@ -1,7 +1,9 @@
-package yapp.nodejs.study.speciallist;
+package kr.co.yapp.speciallist;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+
+import yapp.nodejs.study.speciallist.R;
 
 public class MainActivity extends AppCompatActivity {
 
