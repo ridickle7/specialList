@@ -1,4 +1,4 @@
-package yapp.nodejs.study.speciallist;
+package kr.co.yapp.speciallist;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

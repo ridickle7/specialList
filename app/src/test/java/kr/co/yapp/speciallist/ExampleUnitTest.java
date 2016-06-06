@@ -1,4 +1,4 @@
-package yapp.nodejs.study.speciallist;
+package kr.co.yapp.speciallist;
 
 import org.junit.Test;
 
