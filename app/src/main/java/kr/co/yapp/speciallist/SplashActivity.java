@@ -14,22 +14,17 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.tsengvn.typekit.TypekitContextWrapper;
 
-import java.util.HashMap;
-import java.util.Map;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import kr.co.yapp.speciallist.GCMService.RegistrationIntentService;
 import kr.co.yapp.speciallist.Helper.CustomerHelper;
+import kr.co.yapp.speciallist.Helper.JSONParserHelper;
+import kr.co.yapp.speciallist.Helper.NetworkHelper;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -37,7 +32,6 @@ public class SplashActivity extends AppCompatActivity {
     private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
     private BroadcastReceiver mRegistrationBroadcastReceiver;
 
-    RequestQueue mQueue2;
     Handler mHandler = new Handler(Looper.getMainLooper());
     Class intent_Activity;
 
@@ -50,32 +44,17 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        // 유저 아이디, 비밀번호가 등록 안 되어있는 경우   -> 처음 로그인 한 겁니다.
-        // 토큰 아이디가 없는 경우                        -> 재 로그인해야 합니다.
-        if (CustomerHelper.getInstance().getUserId().equals("") || CustomerHelper.getInstance().getUserPassword().equals("") || CustomerHelper.getInstance().getUserToken().equals("")) {
+        // 토큰 아이디가 없을 경우
+        if (CustomerHelper.getInstance().getUserToken().equals("")) {
             registBroadcastReceiver();
 
             getInstanceIdToken();
-
-            intent_Activity = LoginActivity.class;
         }
 
-        // 문제가 없다!! -> 바로 메인으로 간다.
+        // 토큰 아이디가 있을 경우
         else {
-            intent_Activity = MainActivity.class;
+            playLogin();
         }
-
-        mHandler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-
-                // 여기 intent가 있어도 문제가 없을까?
-                Intent intent = new Intent(getApplicationContext(), intent_Activity);
-                startActivity(intent);
-            }
-        }, 1000);
-
-
     }
 
 
@@ -112,6 +91,8 @@ public class SplashActivity extends AppCompatActivity {
                     // 토큰을 성공적으로 받아왔을 경우
                     String token = intent.getStringExtra("token");      // 토큰을 받아왔다.
                     CustomerHelper.getInstance().setUserToken(token);
+
+                    playLogin();
                 }
             }
         };
@@ -129,7 +110,39 @@ public class SplashActivity extends AppCompatActivity {
                 new IntentFilter(MyApplication.REGISTRATION_GENERATING));
         LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver,
                 new IntentFilter(MyApplication.REGISTRATION_COMPLETE));
+    }
 
+    void playLogin() {
+        NetworkHelper.login(new NetworkHelper.VolleyCallback() {
+            @Override
+            public void onAction(String result) {
+                JSONObject jObject = JSONParserHelper.StringToJSONObject(result);
+                // 문제가 없이 로그인 되었다. -> 바로 메인으로 간다.
+
+                try {
+                    if (jObject.getString("msg").equals(MyApplication.network_login_ok)) {
+                        intent_Activity = MainActivity.class;
+                    } else {
+                        // 한 번도 로그인 안햇을 경우. + 인터넷 연결이 원활하지 않은 경우
+                        if (jObject.getString("msg").equals(MyApplication.network_login_fail))
+                        Toast.makeText(getApplicationContext(), MyApplication.network_login_failMessage, Toast.LENGTH_SHORT).show();
+
+
+                        intent_Activity = LoginActivity.class;
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                mHandler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        // 여기 intent가 있어도 문제가 없을까?
+                        Intent intent = new Intent(getApplicationContext(), intent_Activity);
+                        startActivity(intent);
+                    }
+                }, 5000);
+            }
+        }, getApplicationContext(), CustomerHelper.getInstance().getUserId(), CustomerHelper.getInstance().getUserPassword());
     }
 
     /**
@@ -159,51 +172,6 @@ public class SplashActivity extends AppCompatActivity {
         }
         return true;
     }
-
-    public void login(final Context ctx, final String user_id, final String user_pw) {
-        // /user/add
-        final String URL_address = MyApplication.MAIN_SERVER_ADDRESS + MyApplication.SERVER_USER_LOGIN;
-        mQueue2 = Volley.newRequestQueue(this);
-
-        // Request a string response from the provided URL.
-        // 2) Request Obejct인 StringRequest 생성
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_address,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        // Display the first 500 characters of the response string.
-                        Log.d("Response is: ", response.toString());
-                        Toast.makeText(ctx, response.toString(), Toast.LENGTH_LONG).show();
-
-                        Intent intent = new Intent(SplashActivity.this, MainActivity.class);
-                        startActivity(intent);
-                        finish();
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.d("error", error.toString());
-            }
-
-        }) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-
-                Map<String, String> map = new HashMap<String, String>();
-                map.put(MyApplication.PARAMETER_USERNAME, user_id);
-                map.put(MyApplication.PARAMETER_PASSWORD, user_pw);
-                map.put(MyApplication.PARAMETER_DEVICEID, MyApplication.deviceID);
-                map.put(MyApplication.PARAMETER_OS, "android");
-                map.put(MyApplication.PARAMETER_TOKEN, CustomerHelper.getInstance().getUserToken());
-                Log.d("map : ", user_id + user_pw + MyApplication.deviceID + "");
-                return map;
-            }
-        };
-        // 3) 생성한 StringRequest를 RequestQueue에 추가
-        //mQueue2.add(stringRequest);   //싱글턴 사용 안할 시
-        mQueue2.add(stringRequest);
-    }
-
 
     /* for font */
     @Override

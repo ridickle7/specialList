@@ -75,8 +75,11 @@ public class MyApplication extends Application {
     public static final int METHOD_HOME_DETAIL = 0;
     public static final int METHOD_RECENT_DETAIL = 1;
 
+    public static final String network_login_ok = "login_success";
+    public static final String network_login_fail = "login_fail";
     public static final String network_fail1 = "인터넷 연결이 원활하지 않습니다. 인터넷 연결 확인 후 다시 시도하여 주십시요.";
     public static final String network_fail2 = "인터넷 연결이 원활하지 않습니다. 10초 후 새로고침합니다.";
+    public static final String network_login_failMessage = "인터넷 연결이 원활하지 않습니다. 재로그인을 시도합니다.";
 
 
 
