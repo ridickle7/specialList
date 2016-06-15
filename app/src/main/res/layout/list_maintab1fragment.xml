@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="180dp"
+    android:layout_height="245dp"
+    android:layout_margin="13.33dp"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        card_view:cardCornerRadius="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/back"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/spec_panbyel"
+                android:layout_width="match_parent"
+                android:layout_height="39.67dp"
+                android:layout_marginBottom="1dp"
+                android:background="@drawable/main_fragment1_item_background"
+                android:gravity="center"
+                android:text="시험까지"
+                android:textColor="@color/white"
+                android:textSize="16.667dp" />
+
+            <TextView
+                android:id="@+id/spec_dDay"
+                android:layout_width="match_parent"
+                android:layout_height="126.66dp"
+                android:gravity="center"
+                android:text="D-3"
+                android:textColor="@color/white"
+                android:textSize="52.737dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="26dp"
+                android:layout_marginLeft="6.667dp"
+                android:layout_marginTop="10dp"
+                android:gravity="left|center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/spec_flag"
+                    android:layout_width="25dp"
+                    android:layout_height="15dp"
+                    android:layout_alignParentTop="true"
+                    android:background="@drawable/back"
+                    android:backgroundTint="@color/lightsteelblue"
+                    android:scaleType="centerInside" />
+
+                <TextView
+                    android:id="@+id/spec_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="5dp"
+                    android:layout_toEndOf="@+id/textview3"
+                    android:layout_toRightOf="@+id/textview3"
+                    android:text="그래픽스 운용기사"
+                    android:textSize="16.666dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="26dp"
+                android:layout_marginLeft="6.667dp"
+                android:layout_marginTop="6.667dp"
+                android:gravity="left"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/spec_test_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2016년 02월 28일"
+                    android:textSize="13.33dp" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+</LinearLayout>
