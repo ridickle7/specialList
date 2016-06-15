@@ -3,4 +3,26 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+
+
+    <color name="bg_color_dialog_transparent">#99000000</color>
+    <color name="outline_color_dialog_button">#448844</color>
+    <color name="bg_color_dialog_button">#FFFFFF</color>
+    <color name="bg_color_button_pressed">#999999</color>
+
+
+    <color name="lightsteelblue">#B0C4DE</color>
+    <color name="flag_assign_start">#465966</color>
+    <color name="flag_start">#ff3535</color>
+    <color name="flag_result_start">#ffff35</color>
+
+    <!--서치뷰 컬러-->
+    <color name="searchView_text_Color">#999999</color>
+    <color name="searchView_textHint_Color">#999999</color>
+
+    <!--네비게이션 드로우어 컬러-->
+    <color name="navigationView_background">#f1f3ff</color>
+    <color name="navigationVIew_SpecialList">#35b1ff</color>
 </resources>

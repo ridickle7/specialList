@@ -3,6 +3,7 @@ package kr.co.yapp.speciallist;
 import android.app.Application;
 import android.content.Context;
 import android.graphics.Typeface;
+import android.support.v7.widget.RecyclerView;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
@@ -124,6 +125,13 @@ public class MyApplication extends Application {
 
     public static Context getAppContext() {
         return context;
+    }
+
+    public static void addExpandableFeatures(RecyclerView v) {
+        v.getItemAnimator().setAddDuration(100);
+        v.getItemAnimator().setRemoveDuration(100);
+        v.getItemAnimator().setMoveDuration(200);
+        v.getItemAnimator().setChangeDuration(100);
     }
 
     public static String[] getDate(String string) {

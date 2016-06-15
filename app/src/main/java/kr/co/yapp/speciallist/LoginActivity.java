@@ -3,6 +3,7 @@ package kr.co.yapp.speciallist;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -56,11 +57,13 @@ public class LoginActivity extends AppCompatActivity {
     private View mLoginFormView;
 
     Boolean login_action = null;
+    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        context = LoginActivity.this;
         // Set up the login form.
         mIdView = (AutoCompleteTextView) findViewById(R.id.id);
         populateAutoComplete();
@@ -292,7 +295,7 @@ public class LoginActivity extends AppCompatActivity {
         protected Boolean doInBackground(Void... params) {
             // TODO: attempt authentication against a network service.
             // Simulate network access.
-            NetworkHelper.login(null, getApplicationContext(), mId, mPassword);
+            NetworkHelper.login(null, context, mId, mPassword);
 
 
             // TODO: register the new account here.

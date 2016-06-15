@@ -25,6 +25,7 @@ import kr.co.yapp.speciallist.GCMService.RegistrationIntentService;
 import kr.co.yapp.speciallist.Helper.CustomerHelper;
 import kr.co.yapp.speciallist.Helper.JSONParserHelper;
 import kr.co.yapp.speciallist.Helper.NetworkHelper;
+import kr.co.yapp.speciallist.Main.MainActivity;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -34,6 +35,7 @@ public class SplashActivity extends AppCompatActivity {
 
     Handler mHandler = new Handler(Looper.getMainLooper());
     Class intent_Activity;
+    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +45,7 @@ public class SplashActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+        context = SplashActivity.this;
 
         // 토큰 아이디가 없을 경우
         if (CustomerHelper.getInstance().getUserToken().equals("")) {
@@ -142,7 +145,7 @@ public class SplashActivity extends AppCompatActivity {
                     }
                 }, 5000);
             }
-        }, getApplicationContext(), CustomerHelper.getInstance().getUserId(), CustomerHelper.getInstance().getUserPassword());
+        }, context, CustomerHelper.getInstance().getUserId(), CustomerHelper.getInstance().getUserPassword());
     }
 
     /**

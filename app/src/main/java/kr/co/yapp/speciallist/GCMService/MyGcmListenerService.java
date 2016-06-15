@@ -12,7 +12,7 @@ import android.util.Log;
 
 import com.google.android.gms.gcm.GcmListenerService;
 
-import kr.co.yapp.speciallist.MainActivity;
+import kr.co.yapp.speciallist.Main.MainActivity;
 import kr.co.yapp.speciallist.R;
 
 /**
