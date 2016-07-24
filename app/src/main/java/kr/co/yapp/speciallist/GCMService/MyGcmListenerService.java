@@ -12,8 +12,8 @@ import android.util.Log;
 
 import com.google.android.gms.gcm.GcmListenerService;
 
-import kr.co.yapp.speciallist.Main.MainActivity;
 import kr.co.yapp.speciallist.R;
+import kr.co.yapp.speciallist.SplashActivity;
 
 /**
  * Created by home on 2016-06-07.
@@ -35,6 +35,12 @@ public class MyGcmListenerService extends GcmListenerService {
         Log.d(TAG, "Title: " + title);
         Log.d(TAG, "Message: " + message);
 
+        if (from.startsWith("/topics/")) {
+            // message received from some topic.
+        } else {
+            // normal downstream message.
+        }
+
         // GCM으로 받은 메세지를 디바이스에 알려주는 sendNotification()을 호출한다.
         sendNotification(title, message);
     }
@@ -46,7 +52,7 @@ public class MyGcmListenerService extends GcmListenerService {
      * @param message
      */
     private void sendNotification(String title, String message) {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, SplashActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
                 PendingIntent.FLAG_ONE_SHOT);

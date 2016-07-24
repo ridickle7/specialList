@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/comment_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="7"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <kr.co.yapp.speciallist.Custom_Object.NewTextView
+                    android:id="@+id/comment_writer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:text="ridickle7" />
+
+                <RatingBar
+                    android:id="@+id/ratingBar"
+                    style="?android:attr/ratingBarStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+
+            <kr.co.yapp.speciallist.Custom_Object.NewTextView
+                android:id="@+id/comment_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:text="이거 왜 따는지 모르겠어요이거 왜 따는지 모르겠어요이거 왜 따는지 모르겠어요이거 왜 따는지 모르겠어요" />
+
+            <kr.co.yapp.speciallist.Custom_Object.NewTextView
+                android:id="@+id/comment_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2016-03-02 12:00" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ToggleButton
+                android:id="@+id/comment_good_toogle"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:textOn=""
+                android:textOff=""
+                android:scaleType="centerInside"
+                android:background="@drawable/comment_toggle" />
+
+            <kr.co.yapp.speciallist.Custom_Object.NewTextView
+                android:id="@+id/comment_good_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="215" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>

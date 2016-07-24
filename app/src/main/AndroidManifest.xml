@@ -13,6 +13,9 @@
     <!-- [END gcm_permission] -->
 
 
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"></uses-permission>
+
     <!-- 스마트폰 정보 보기 위한 permission -->
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
@@ -27,7 +30,8 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SplashActivity">
+        <activity android:name=".SplashActivity"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -86,7 +90,21 @@
             android:name=".Main.MainActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".DetailActivity"></activity>
+        <activity
+            android:name=".Detail.DetailActivity"
+            android:label="DetailActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".Comment.CommentActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+
+        <receiver android:name=".Helper.Alarm.AlarmBroadCast" android:process=":remote" >
+            <intent-filter>
+                <!--<action android:name="kr.co.yapp.speciallist.alarm">-->
+                <!--</action>-->
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+            </receiver>
     </application>
 
 </manifest>

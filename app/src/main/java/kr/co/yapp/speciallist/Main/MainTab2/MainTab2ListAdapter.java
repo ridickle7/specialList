@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import kr.co.yapp.speciallist.Custom_Object.Tab2ChildView;
-import kr.co.yapp.speciallist.DetailActivity;
+import kr.co.yapp.speciallist.Detail.DetailActivity;
 import kr.co.yapp.speciallist.MyApplication;
 import kr.co.yapp.speciallist.R;
 
@@ -113,6 +113,7 @@ public class MainTab2ListAdapter extends RecyclerView.Adapter<MainTab2ListAdapte
                         Intent intent = new Intent(ctx, DetailActivity.class);
                         intent.putExtra(MyApplication.PARAMETER_SPECID, bindTextView.childId);
                         intent.putExtra(MyApplication.PARAMETER_METHOD, 1);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         ctx.startActivity(intent);
                     }
                 });

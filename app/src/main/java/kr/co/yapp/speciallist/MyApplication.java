@@ -152,5 +152,18 @@ public class MyApplication extends Application {
         return return_string;
     }
 
+    // 2016-04-03 => {2016,4,3}
+    public static String[] getYMD(String string) {
+        Log.d("MyApplication 156 : ", string);
+        String[] return_string = {"ddd", "bbb", "ccc"};
+
+        StringTokenizer values = new StringTokenizer(string, "-");
+        for (int x = 1; values.hasMoreElements(); x++) {
+            return_string[x - 1] = values.nextToken();
+        }
+
+        return return_string;
+    }
+
 
 }

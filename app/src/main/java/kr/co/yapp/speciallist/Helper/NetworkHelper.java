@@ -353,6 +353,7 @@ public class NetworkHelper {
             protected Map<String, String> getParams() throws AuthFailureError {
 
                 Map<String, String> map = new HashMap<String, String>();
+                map.put(MyApplication.PARAMETER_USERID, CustomerHelper.getInstance().get_Id());
                 return map;
             }
         };
@@ -360,6 +361,8 @@ public class NetworkHelper {
         //mQueue2.add(stringRequest);   //싱글턴 사용 안할 시
         mQueue2.add(stringRequest);
     }
+
+
 
     public interface VolleyCallback {
         void onAction(String result);

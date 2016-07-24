@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
     // Tab2의 recyclerview
     RecyclerView recyclerView;
 
-    Context context;
+    public static Context context;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

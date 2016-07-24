@@ -17,7 +17,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import kr.co.yapp.speciallist.DetailActivity;
+import kr.co.yapp.speciallist.Detail.DetailActivity;
 import kr.co.yapp.speciallist.MyApplication;
 import kr.co.yapp.speciallist.R;
 
