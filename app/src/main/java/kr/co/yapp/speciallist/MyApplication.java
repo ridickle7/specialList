@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
+import com.nhn.android.naverlogin.OAuthLogin;
 import com.tsengvn.typekit.Typekit;
 
 import java.util.StringTokenizer;
@@ -18,7 +19,7 @@ public class MyApplication extends Application {
 
 
     //서버 주소
-    public static final String MAIN_SERVER_ADDRESS = "http://211.249.50.198:4000";
+    public static final String MAIN_SERVER_ADDRESS = "http://52.79.87.95:4000";
 
     //URL category
     public static final String SERVER_USER_EXERCISE = "/user/exercise";
@@ -82,6 +83,15 @@ public class MyApplication extends Application {
     public static final String network_fail2 = "인터넷 연결이 원활하지 않습니다. 10초 후 새로고침합니다.";
     public static final String network_login_failMessage = "인터넷 연결이 원활하지 않습니다. 재로그인을 시도합니다.";
 
+
+    private static OAuthLogin oAuthLoginInstance;
+
+    /**
+     * client 정보를 넣어준다.
+     */
+    private static String OAUTH_CLIENT_ID = "GQ0dkdh9_LlYEj3VLveh";
+    private static String OAUTH_CLIENT_SECRET = "8rBicZqElA";
+    private static String OAUTH_CLIENT_NAME = "SpecialList";
 
 
     public static final String textType = "NotoSansKR-Regular-Hestia.otf";
@@ -165,5 +175,21 @@ public class MyApplication extends Application {
         return return_string;
     }
 
+
+    public static OAuthLogin getOAuthLoginInstance() {
+        return oAuthLoginInstance;
+    }
+
+    public static void setOAuthLoginInstance(Context ctx) {
+        oAuthLoginInstance = OAuthLogin.getInstance();
+        oAuthLoginInstance.init(
+                ctx,
+                OAUTH_CLIENT_ID
+                ,OAUTH_CLIENT_SECRET
+                ,OAUTH_CLIENT_NAME
+                //,OAUTH_CALLBACK_INTENT
+                // SDK 4.1.4 버전부터는 OAUTH_CALLBACK_INTENT변수를 사용하지 않습니다.
+        );
+    }
 
 }
